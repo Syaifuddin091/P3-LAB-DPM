@@ -1,20 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View ,Button} from 'react-native';
+import ProfileScreen from './src/pages/profile';
+import Constants from 'expo-constants';
+import LifeCycle from './src/components/lifecycle';
+import {useState} from 'react';
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  const [showLifeCycle, setShowLifeCycle] =useState(true);
+return (
+  <SafeAreaView style={styles.safeArea}>
+    <StatusBar style="auto" />
+    <ProfileScreen />
+
+    {showLifeCycle && <LifeCycle/>}
+    <Button 
+      title="Toggle LifeCycle Component"
+      onPress={()=> setShowLifeCycle(!showLifeCycle)}
+    />
+  </SafeAreaView>
+);
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+  },
+  button: {
+    backgroundColor: "#6200ea",
+    borderRadius: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
